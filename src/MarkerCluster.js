@@ -33,7 +33,7 @@ export var MarkerCluster = Marker.extend({
 		storageArray = storageArray || [];
 
 		for (var i = this._childClusters.length - 1; i >= 0; i--) {
-			this._childClusters[i].getAllChildMarkers(storageArray);
+			this._childClusters[i].getAllChildMarkers(storageArray, ignoreDraggedMarker);
 		}
 
 		for (var j = this._markers.length - 1; j >= 0; j--) {
