@@ -12,7 +12,7 @@ To run the tests, run "jake test".
 For a custom build, open build/build.html in the browser and follow the instructions.
 */
 
-var path = require('path');
+import { join } from 'path';
 
 desc('Check Leaflet.markercluster source for errors with JSHint');
 task('lint', {
@@ -44,8 +44,8 @@ task('uglify', ['build'], function(){
 desc('Run PhantomJS tests');
 task('test', ['lint'], function() {
 
-	var karma = require('karma'),
-	testConfig = {configFile : path.join(__dirname, './spec/karma.conf.js')};
+	const karma = require('karma'),
+	testConfig = {configFile : join(__dirname, './spec/karma.conf.js')};
 
 	testConfig.browsers = ['PhantomJS'];
 
@@ -79,7 +79,7 @@ task('test', ['lint'], function() {
 
 	console.log('Running tests...');
 
-	var server = new karma.Server(testConfig, function(exitCode) {
+	const server = new karma.Server(testConfig, function(exitCode) {
 		if (!exitCode) {
 			console.log('\tTests ran successfully.\n');
 			complete();

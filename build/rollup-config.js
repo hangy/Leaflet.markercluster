@@ -6,9 +6,8 @@ import json from 'rollup-plugin-json'
 
 import gitRev from 'git-rev-sync'
 
-
-let version = require('../package.json').version;
 let release;
+let version = '';
 
 // Skip the git branch+rev in the banner when doing a release build
 if (process.env.NODE_ENV === 'release') {
@@ -32,8 +31,7 @@ export default {
 	output: {
 		banner,
 		file: 'dist/leaflet.markercluster-src.js',
-		format: 'umd',
-		legacy: true, // Needed to create files loadable by IE8
+		format: 'es',
 		name: 'Leaflet.markercluster',
 		sourcemap: true,
 	},
