@@ -34,7 +34,7 @@
 	"scripts": {
 		"test": "karma start ./spec/karma.conf.js",
 		"prepublish": "jake",
-		"rollup": "rollup -c build/rollup-config.js"
+		"rollup": "rollup -c build/rollup-config.mjs"
 	},
 	"keywords": [
 		"gis",
