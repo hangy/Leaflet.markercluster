@@ -56,7 +56,7 @@ Include the plugin CSS and JS files on your page after Leaflet files, using your
 In each case, use files in the `dist` folder:
 * `MarkerCluster.css`
 * `MarkerCluster.Default.css` (not needed if you use your own `iconCreateFunction` instead of the default one)
-* `leaflet.markercluster.js` (or `leaflet.markercluster-src.js` for the non-minified version)
+* `leaflet.markercluster.min.js` (or `leaflet.markercluster.js` for the non-minified version)
 
 ### Building, testing and linting scripts
 Install jake `npm install -g jake` then run `npm install`
