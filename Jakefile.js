@@ -36,6 +36,11 @@ task('build', ['lint'], {
 	});
 });
 
+desc('Compress bundled files');
+task('uglify', ['build'], function(){
+  jake.exec('npm run-script uglify', function() { console.log('Uglyfied.'); });
+});
+
 desc('Run PhantomJS tests');
 task('test', ['lint'], function() {
 
@@ -85,4 +90,4 @@ task('test', ['lint'], function() {
 	server.start();
 });
 
-task('default', ['build']);
+task('default', ['build', 'uglify']);

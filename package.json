@@ -1,13 +1,11 @@
 {
 	"name": "leaflet.markercluster",
-	"repository": "https://github.com/hangy/Leaflet.markercluster",
+	"repository": "https://github.com/Leaflet/Leaflet.markercluster",
 	"version": "1.5.4",
 	"description": "Provides Beautiful Animated Marker Clustering functionality for Leaflet",
 	"devDependencies": {
-		"@rollup/plugin-terser": "^0.4.4",
-		"@semantic-release/changelog": "^6.0.3",
-		"@semantic-release/git": "^10.0.1",
 		"@types/leaflet": "^1.9.16",
+		"git-rev-sync": "^3.0.2",
 		"happen": "^0.3.1",
 		"jake": "10.9.2",
 		"jshint": "^2.13.6",
@@ -23,18 +21,21 @@
 		"mocha": "11.1.0",
 		"phantomjs-prebuilt": "^2.1.14",
 		"rollup": "4.34.9",
-		"semantic-release": "^24.2.3"
+		"rollup-plugin-git-version": "0.3.1",
+		"rollup-plugin-json": "4.0.0",
+		"uglify-js": "3.19.3"
 	},
 	"peerDependencies": {
 		"leaflet": "^1.9.4"
 	},
-	"main": "dist/leaflet.markercluster.js",
+	"main": "dist/leaflet.markercluster-src.js",
 	"style": "dist/MarkerCluster.css",
 	"type": "module",
 	"scripts": {
 		"test": "karma start ./spec/karma.conf.js",
 		"prepublish": "jake",
-		"rollup": "rollup -c build/rollup-config.mjs"
+		"rollup": "rollup -c build/rollup-config.mjs",
+		"uglify": "uglifyjs dist/leaflet.markercluster-src.js -c -m -o dist/leaflet.markercluster.js --source-map \"filename=dist/leaflet.markercluster.js.map,content=dist/leaflet.markercluster-src.js.map,url=leaflet.markercluster.js.map\""
 	},
 	"keywords": [
 		"gis",
