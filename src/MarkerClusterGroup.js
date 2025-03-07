@@ -11,7 +11,6 @@ import { Point } from 'leaflet/src/geometry';
 import { Polygon } from 'leaflet/src/layer/vector';
 
 import { MarkerCluster } from './MarkerCluster.js';
-import { MarkerClusterNonAnimated } from './MarkerCluster.Spiderfier.js';
 import { DistanceGrid } from './DistanceGrid.js';
 
 export const MarkerClusterGroup = FeatureGroup.extend({

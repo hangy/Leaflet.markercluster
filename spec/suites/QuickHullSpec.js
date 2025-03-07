@@ -1,3 +1,6 @@
+import { expect } from '@esm-bundle/chai';
+import { QuickHull } from '../../src/MarkerCluster.QuickHull.js';
+
 describe('quickhull', function () {
 	describe('getDistant', function () {
 		it('zero distance', function () {
@@ -5,20 +8,20 @@ describe('quickhull', function () {
 				{ lat: 0, lng: 0 },
 				{ lat: 0, lng: 10 }
 			];
-			expect(L.QuickHull.getDistant({ lat: 0, lng: 0 }, bl)).to.eql(0);
+			expect(QuickHull.getDistant({ lat: 0, lng: 0 }, bl)).to.eql(0);
 		});
 		it('non-zero distance', function () {
 			var bl = [
 				{ lat: 0, lng: 0 },
 				{ lat: 0, lng: 10 }
 			];
-			expect(L.QuickHull.getDistant({ lat: 5, lng: 5 }, bl)).to.eql(-50);
+			expect(QuickHull.getDistant({ lat: 5, lng: 5 }, bl)).to.eql(-50);
 		});
 	});
 
 	describe('getConvexHull', function () {
 		it('creates a hull', function () {
-			expect(L.QuickHull.getConvexHull([	{ lat: 0, lng: 0 },
+			expect(QuickHull.getConvexHull([	{ lat: 0, lng: 0 },
 								{ lat: 10, lng: 0 },
 								{ lat: 10, lng: 10 },
 								{ lat: 0, lng: 10 },
@@ -31,7 +34,7 @@ describe('quickhull', function () {
 							 ]);
 		});
 		it('creates a hull for vertically-aligned objects', function () {
-			expect(L.QuickHull.getConvexHull([	{ lat: 0, lng: 0 },
+			expect(QuickHull.getConvexHull([	{ lat: 0, lng: 0 },
 								{ lat: 5, lng: 0 },
 								{ lat: 10, lng: 0 }
 							 ])).to.eql([
@@ -40,7 +43,7 @@ describe('quickhull', function () {
 							 ]);
 		});
 		it('creates a hull for horizontally-aligned objects', function () {
-			expect(L.QuickHull.getConvexHull([	{ lat: 0, lng: 0 },
+			expect(QuickHull.getConvexHull([	{ lat: 0, lng: 0 },
 								{ lat: 0, lng: 5 },
 								{ lat: 0, lng: 10 }
 							 ])).to.eql([

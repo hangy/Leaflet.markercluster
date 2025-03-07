@@ -1,8 +1,14 @@
+import { expect } from '@esm-bundle/chai';
+import { Map } from 'leaflet/src/map';
+import { Icon, Marker } from 'leaflet/src/layer/marker';
+import { LatLngBounds } from 'leaflet/src/geo';
+import { MarkerClusterGroup } from '../../src/index.js';
+
 describe('singleMarkerMode option', function () {
 	/////////////////////////////
 	// SETUP FOR EACH TEST
 	/////////////////////////////
-	var div, map, group, defaultIcon, clusterIcon, marker;
+	let div, map, group, defaultIcon, clusterIcon, marker;
 
 	beforeEach(function () {
 		div = document.createElement('div');
@@ -10,22 +16,22 @@ describe('singleMarkerMode option', function () {
 		div.style.height = '200px';
 		document.body.appendChild(div);
 	
-		map = L.map(div, { maxZoom: 18, trackResize: false });
+		map = new Map(div, { maxZoom: 18, trackResize: false });
 	
 		// Corresponds to zoom level 8 for the above div dimensions.
-		map.fitBounds(new L.LatLngBounds([
+		map.fitBounds(new LatLngBounds([
 			[1, 1],
 			[2, 2]
 		]));
 
-		defaultIcon = new L.Icon.Default();
-	    clusterIcon = new L.Icon.Default();
-		marker = L.marker([1.5, 1.5]);
+		defaultIcon = new Icon.Default();
+	    clusterIcon = new Icon.Default();
+		marker = new Marker([1.5, 1.5]);
 		marker.setIcon(defaultIcon);
 	});
 
 	afterEach(function () {
-		if (group instanceof L.MarkerClusterGroup) {
+		if (group instanceof MarkerClusterGroup) {
 			group.removeLayers(group.getLayers());
 			map.removeLayer(group);
 		}
@@ -41,7 +47,7 @@ describe('singleMarkerMode option', function () {
 	/////////////////////////////
 	it('overrides marker icons when set to true', function () {
 
-		group = L.markerClusterGroup({
+		group = new MarkerClusterGroup({
 			singleMarkerMode: true,
 			iconCreateFunction: function (layer) {
 				return clusterIcon;
@@ -58,7 +64,7 @@ describe('singleMarkerMode option', function () {
 
 	it('does not modify marker icons by default (or set to false)', function () {
 
-		group = L.markerClusterGroup({
+		group = new MarkerClusterGroup({
 			iconCreateFunction: function (layer) {
 				return clusterIcon;
 			}

@@ -1,8 +1,15 @@
-﻿describe('addLayers adding multiple markers', function () {
+﻿import { expect } from '@esm-bundle/chai';
+import { Map } from 'leaflet/src/map';
+import { LayerGroup } from 'leaflet/src/layer';
+import { Marker } from 'leaflet/src/layer/marker';
+import { LatLngBounds } from 'leaflet/src/geo';
+import { MarkerClusterGroup } from '../../src/index.js';
+
+describe('addLayers adding multiple markers', function () {
 	/////////////////////////////
 	// SETUP FOR EACH TEST
 	/////////////////////////////
-	var div, map, group;
+	let div, map, group;
 
 	beforeEach(function () {
 		div = document.createElement('div');
@@ -10,17 +17,17 @@
 		div.style.height = '200px';
 		document.body.appendChild(div);
 	
-		map = L.map(div, { maxZoom: 18, trackResize: false });
+		map = new Map(div, { maxZoom: 18, trackResize: false });
 	
 		// Corresponds to zoom level 8 for the above div dimensions.
-		map.fitBounds(new L.LatLngBounds([
+		map.fitBounds(new LatLngBounds([
 			[1, 1],
 			[2, 2]
 		]));
 	});
 
 	afterEach(function () {
-		if (group instanceof L.MarkerClusterGroup) {
+		if (group instanceof MarkerClusterGroup) {
 			group.clearLayers();
 			map.removeLayer(group);
 		}
@@ -36,10 +43,10 @@
 	/////////////////////////////
 	it('creates a cluster when 2 overlapping markers are added before the group is added to the map', function () {
 
-		group = new L.MarkerClusterGroup();
+		group = new MarkerClusterGroup();
 
-		var marker = new L.Marker([1.5, 1.5]);
-		var marker2 = new L.Marker([1.5, 1.5]);
+		const marker = new Marker([1.5, 1.5]);
+		const marker2 = new Marker([1.5, 1.5]);
 
 		group.addLayers([marker, marker2]);
 		map.addLayer(group);
@@ -52,10 +59,10 @@
 
 	it('creates a cluster when 2 overlapping markers are added after the group is added to the map', function () {
 
-		group = new L.MarkerClusterGroup();
+		group = new MarkerClusterGroup();
 
-		var marker = new L.Marker([1.5, 1.5]);
-		var marker2 = new L.Marker([1.5, 1.5]);
+		const marker = new Marker([1.5, 1.5]);
+		const marker2 = new Marker([1.5, 1.5]);
 
 		map.addLayer(group);
 		group.addLayers([marker, marker2]);
@@ -68,11 +75,11 @@
 
 	it('creates a cluster and marker when 2 overlapping markers and one non-overlapping are added before the group is added to the map', function () {
 
-		group = new L.MarkerClusterGroup();
+		group = new MarkerClusterGroup();
 
-		var marker = new L.Marker([1.5, 1.5]);
-		var marker2 = new L.Marker([1.5, 1.5]);
-		var marker3 = new L.Marker([3.0, 1.5]);
+		const marker = new Marker([1.5, 1.5]);
+		const marker2 = new Marker([1.5, 1.5]);
+		const marker3 = new Marker([3.0, 1.5]);
 
 		group.addLayers([marker, marker2, marker3]);
 		map.addLayer(group);
@@ -86,11 +93,11 @@
 
 	it('creates a cluster and marker when 2 overlapping markers and one non-overlapping are added after the group is added to the map', function () {
 
-		group = new L.MarkerClusterGroup();
+		group = new MarkerClusterGroup();
 
-		var marker = new L.Marker([1.5, 1.5]);
-		var marker2 = new L.Marker([1.5, 1.5]);
-		var marker3 = new L.Marker([3.0, 1.5]);
+		const marker = new Marker([1.5, 1.5]);
+		const marker2 = new Marker([1.5, 1.5]);
+		const marker3 = new Marker([3.0, 1.5]);
 
 		map.addLayer(group);
 		group.addLayers([marker, marker2, marker3]);
@@ -104,12 +111,12 @@
 
 	it('handles nested Layer Groups', function () {
 
-		group = new L.MarkerClusterGroup();
+		group = new MarkerClusterGroup();
 
-		var marker1 = new L.Marker([1.5, 1.5]);
-		var marker2 = new L.Marker([1.5, 1.5]);
-		var marker3 = new L.Marker([3.0, 1.5]);
-		var layerGroup = new L.LayerGroup([marker1, new L.LayerGroup([marker2])]);
+		const marker1 = new Marker([1.5, 1.5]);
+		const marker2 = new Marker([1.5, 1.5]);
+		const marker3 = new Marker([3.0, 1.5]);
+		const layerGroup = new LayerGroup([marker1, new LayerGroup([marker2])]);
 
 		map.addLayer(group);
 		group.addLayers([layerGroup, marker3]);
@@ -123,13 +130,13 @@
 
 	it('unspiderfies before adding new Marker(s)', function () {
 
-		var clock = sinon.useFakeTimers();
+		let clock = sinon.useFakeTimers();
 
-		group = new L.MarkerClusterGroup();
+		group = new MarkerClusterGroup();
 
-		var marker = new L.Marker([1.5, 1.5]);
-		var marker2 = new L.Marker([1.5, 1.5]);
-		var marker3 = new L.Marker([1.5, 1.5]);
+		const marker = new Marker([1.5, 1.5]);
+		const marker2 = new Marker([1.5, 1.5]);
+		const marker3 = new Marker([1.5, 1.5]);
 
 		group.addLayers([marker, marker2]);
 		map.addLayer(group);
