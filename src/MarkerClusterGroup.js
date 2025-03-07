@@ -11,9 +11,10 @@ import { Point } from 'leaflet/src/geometry';
 import { Polygon } from 'leaflet/src/layer/vector';
 
 import { MarkerCluster } from './MarkerCluster.js';
+import { MarkerClusterNonAnimated } from './MarkerCluster.Spiderfier.js';
 import { DistanceGrid } from './DistanceGrid.js';
 
-export var MarkerClusterGroup = FeatureGroup.extend({
+export const MarkerClusterGroup = FeatureGroup.extend({
 
 	options: {
 		maxClusterRadius: 80, //A cluster will cover at most this many pixels from its center
@@ -532,7 +533,7 @@ export var MarkerClusterGroup = FeatureGroup.extend({
 		id = parseInt(id, 10);
 
 		this.eachLayer(function (l) {
-			if (stamp(l) === id) {
+			if (Util.stamp(l) === id) {
 				result = l;
 			}
 		});
@@ -1419,6 +1420,6 @@ MarkerClusterGroup.include({
 	}
 });
 
-var markerClusterGroup = function (options) {
+export const markerClusterGroup = function (options) {
 	return new MarkerClusterGroup(options);
 };

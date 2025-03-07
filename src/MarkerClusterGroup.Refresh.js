@@ -5,8 +5,11 @@
  * to make up the cluster icon).
  */
 
+import { MarkerCluster } from './MarkerCluster.js';
 import { MarkerClusterGroup } from './MarkerClusterGroup.js';
+import { LayerGroup } from 'leaflet/src/layer';
 import { Marker } from 'leaflet/src/layer/marker';
+import { Util } from 'leaflet/src/core';
 
 MarkerClusterGroup.include({
 	/**
@@ -95,7 +98,7 @@ Marker.include({
 	refreshIconOptions: function (options, directlyRefreshClusters) {
 		var icon = this.options.icon;
 
-		setOptions(icon, options);
+		Util.setOptions(icon, options);
 
 		this.setIcon(icon);
 
