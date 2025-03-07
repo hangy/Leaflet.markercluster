@@ -27,7 +27,6 @@ export default function (config) {
 			'karma-rollup-preprocessor',
 			'karma-mocha',
 			'karma-coverage',
-			'karma-phantomjs-launcher',
 			'karma-chrome-launcher',
 			'karma-safari-launcher',
 			'karma-firefox-launcher'
