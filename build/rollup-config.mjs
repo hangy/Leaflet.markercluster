@@ -36,6 +36,8 @@ const banner = `/*! ************************************************************
 ***************************************************************************** */
 `;
 
+const external = ["leaflet/src/layer/marker","leaflet/src/core", "leaflet/src/layer", "leaflet/src/geo", "leaflet/src/dom", "leaflet/src/geometry", "leaflet/src/layer/vector", "leaflet/src/layer/layer", "leaflet/src/layer/feature"];
+
 export default [
   {
     input: "src/index.js",
@@ -46,7 +48,8 @@ export default [
       name: "Leaflet.markercluster",
       sourcemap: true
     },
-    plugins: [release ? json() : rollupGitVersion()]
+    plugins: [release ? json() : rollupGitVersion()],
+    external: external
   },
   {
     input: "src/index.js",
@@ -55,8 +58,9 @@ export default [
       file: "dist/leaflet.markercluster-esm.js",
       format: "es",
       name: "Leaflet.markercluster",
-      sourcemap: true
+      sourcemap: true,
     },
-    plugins: [terser()]
+    plugins: [terser()],
+    external: external
   }
 ];

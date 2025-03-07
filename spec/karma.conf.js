@@ -1,4 +1,4 @@
-import json from 'rollup-plugin-json';
+import json from "@rollup/plugin-json";
 
 // Karma configuration
 export default function (config) {
@@ -55,6 +55,7 @@ export default function (config) {
 				format: 'umd',
 				name: 'Leaflet.markercluster'
 			},
+			external: ["leaflet/src/layer/marker","leaflet/src/core", "leaflet/src/layer", "leaflet/src/geo", "leaflet/src/dom", "leaflet/src/geometry", "leaflet/src/layer/vector", "leaflet/src/layer/layer", "leaflet/src/layer/feature"]
 		},
 
 		// test results reporter to use
