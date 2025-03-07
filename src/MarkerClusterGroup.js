@@ -136,6 +136,10 @@ export var MarkerClusterGroup = FeatureGroup.extend({
 		    currentZoom = this._zoom;
 		if (layer.__parent) {
 			while (visibleLayer.__parent._zoom >= currentZoom) {
+				// Check if visibleLayer.__parent is undefined to avoid crashing in the next loop.
+				if (visibleLayer.__parent === undefined) {
+					break;
+				}
 				visibleLayer = visibleLayer.__parent;
 			}
 		}
@@ -303,7 +307,8 @@ export var MarkerClusterGroup = FeatureGroup.extend({
 
 			process();
 		} else {
-			var needsClustering = this._needsClustering;
+			var needsClustering = new Array(l - offset);	// improve performance by preallocating the maximum size of our array
+			var tail = 0;
 
 			for (; offset < l; offset++) {
 				m = layersArray[offset];
@@ -329,8 +334,11 @@ export var MarkerClusterGroup = FeatureGroup.extend({
 					continue;
 				}
 
-				needsClustering.push(m);
+				needsClustering[tail++] = m;
 			}
+
+			needsClustering = needsClustering.slice(0, tail);	// truncate empty elements
+			this._needsClustering = this._needsClustering.concat(needsClustering);
 		}
 		return this;
 	},

@@ -4,3 +4,7 @@ dist
 # mstest test results
 TestResults
 node_modules
+
+# dist files
+dist/*.js
+dist/*.js.map
