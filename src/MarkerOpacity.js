@@ -6,7 +6,7 @@
 *
 */
 
-import { Marker } from 'leaflet/src/layer/marker';
+import { Marker } from 'leaflet';
 
 Marker.include({
 	clusterHide: function () {

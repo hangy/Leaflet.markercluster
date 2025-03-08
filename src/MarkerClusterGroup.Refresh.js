@@ -7,9 +7,7 @@
 
 import { MarkerCluster } from './MarkerCluster.js';
 import { MarkerClusterGroup } from './MarkerClusterGroup.js';
-import { LayerGroup } from 'leaflet/src/layer';
-import { Marker } from 'leaflet/src/layer/marker';
-import { Util } from 'leaflet/src/core';
+import { LayerGroup, Marker, Util } from 'leaflet';
 
 MarkerClusterGroup.include({
 	/**

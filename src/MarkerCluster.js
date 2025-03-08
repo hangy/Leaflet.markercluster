@@ -1,5 +1,4 @@
-import { Icon, Marker } from 'leaflet/src/layer/marker';
-import { LatLng, LatLngBounds } from 'leaflet/src/geo';
+import { Icon, LatLng, LatLngBounds, Marker } from 'leaflet';
 
 export const MarkerCluster = Marker.extend({
 	options: Icon.prototype.options,

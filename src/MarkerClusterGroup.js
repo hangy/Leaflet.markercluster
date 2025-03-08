@@ -2,13 +2,7 @@
  * MarkerClusterGroup extends FeatureGroup by clustering the markers contained within
  */
 
-import { FeatureGroup, LayerGroup } from 'leaflet/src/layer';
-import { Marker, DivIcon } from 'leaflet/src/layer/marker';
-import { LatLng, LatLngBounds } from 'leaflet/src/geo';
-import { Browser, Util } from 'leaflet/src/core';
-import { DomUtil } from 'leaflet/src/dom';
-import { Point } from 'leaflet/src/geometry';
-import { Polygon } from 'leaflet/src/layer/vector';
+import { Browser, DivIcon, DomUtil, FeatureGroup, LatLng, LatLngBounds, LayerGroup, Marker, Point, Polygon, Util } from 'leaflet';
 
 import { MarkerCluster } from './MarkerCluster.js';
 import { DistanceGrid } from './DistanceGrid.js';

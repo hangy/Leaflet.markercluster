@@ -3,10 +3,7 @@
 
 import { MarkerCluster } from './MarkerCluster.js';
 import { MarkerClusterGroup } from './MarkerClusterGroup.js';
-import { Browser, Util } from 'leaflet/src/core';
-import { DomUtil } from 'leaflet/src/dom';
-import { Point } from 'leaflet/src/geometry';
-import { Path, Polyline } from 'leaflet/src/layer/vector';
+import { Browser, DomUtil, Path, Point, Polyline, Util } from 'leaflet';
 
 MarkerCluster.include({
 

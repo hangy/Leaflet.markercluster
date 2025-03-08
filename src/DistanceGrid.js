@@ -1,4 +1,4 @@
-import { Util } from 'leaflet/src/core';
+import { Util } from 'leaflet';
 
 export var DistanceGrid = function (cellSize) {
 	this._cellSize = cellSize;
