@@ -3,16 +3,26 @@
   <head>
     <title>Leaflet debug page</title>
 
+    <script type="importmap">
+      {
+        "imports": {
+          "leaflet": "https://unpkg.com/leaflet@1.9.4/dist/leaflet-src.esm.js",
+          "leaflet.markercluster": "../dist/leaflet.markercluster-esm.js"
+        }
+      }
+    </script>
+
     <link
       rel="stylesheet"
-      href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css"
-      integrity="sha512-07I2e+7D8p6he1SIM+1twR5TIrhUQn9+I6yjqD53JQjFiMf8EtC93ty0/5vJTZGF8aAocvHYNEDJajGdNx1IsQ=="
-      crossorigin=""
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+      integrity="sha512-Zcn6bjR/8RZbLEpLIeOwNtzREBAJnUKESxces60Mpoj+2okopSAcSUIUOseddDm0cxnGQzxIR7vJgsLZbdLE3w=="
+      crossorigin="anonymous"
     />
     <script
-      src="https://unpkg.com/leaflet@1.0.3/dist/leaflet-src.js"
-      integrity="sha512-WXoSHqw/t26DszhdMhOXOkI7qCiv5QWXhH9R7CgvgZMHz1ImlkVQ3uNsiQKu5wwbbxtPzFXd1hK4tzno2VqhpA=="
-      crossorigin=""
+      src="https://unpkg.com/leaflet@1.9.4/dist/leaflet-src.esm.js"
+      integrity="sha512-/Zt0ZlKYvvW9BBzNnOHT+QYeT/cGTk6OC4mKrI/FOJXDDvgABw7lUBBMoqDnpOS4HgQ8LwdL+yJ7ArjBoL7ITQ=="
+      crossorigin="anonymous"
+      type="module"
     ></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="../screen.css" />
@@ -27,7 +37,10 @@
     <br />
     <div style="color: #888"><strong>Note:</strong> The marker on the old cluster position comes back on next move or on map scrolling.</div>
 
-    <script type="text/javascript">
+    <script type="module">
+      import { Map, TileLayer, LatLng, Marker, DomUtil } from "https://unpkg.com/leaflet@1.9.4/dist/leaflet-src.esm.js";
+      import { MarkerClusterGroup } from "../../dist/leaflet.markercluster-esm.js";
+
       var stationJson = {
         type: "FeatureCollection",
         features: [
