@@ -3,22 +3,39 @@
   <head>
     <title>Leaflet debug page</title>
 
+    <script type="importmap">
+      {
+        "imports": {
+          "leaflet": "https://unpkg.com/leaflet@1.9.4/dist/leaflet-src.esm.js",
+          "leaflet/src/core": "https://unpkg.com/leaflet@1.9.4/dist/leaflet-src.esm.js",
+          "leaflet/src/dom": "https://unpkg.com/leaflet@1.9.4/dist/leaflet-src.esm.js",
+          "leaflet/src/geo": "https://unpkg.com/leaflet@1.9.4/dist/leaflet-src.esm.js",
+          "leaflet/src/geometry": "https://unpkg.com/leaflet@1.9.4/dist/leaflet-src.esm.js",
+          "leaflet/src/layer": "https://unpkg.com/leaflet@1.9.4/dist/leaflet-src.esm.js",
+          "leaflet/src/layer/marker": "https://unpkg.com/leaflet@1.9.4/dist/leaflet-src.esm.js",          
+          "leaflet/src/layer/vector": "https://unpkg.com/leaflet@1.9.4/dist/leaflet-src.esm.js",          
+          "leaflet.markercluster": "../dist/leaflet.markercluster-esm.js"
+        }
+      }
+    </script>
+
     <link
       rel="stylesheet"
-      href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css"
-      integrity="sha512-07I2e+7D8p6he1SIM+1twR5TIrhUQn9+I6yjqD53JQjFiMf8EtC93ty0/5vJTZGF8aAocvHYNEDJajGdNx1IsQ=="
-      crossorigin=""
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+      integrity="sha512-Zcn6bjR/8RZbLEpLIeOwNtzREBAJnUKESxces60Mpoj+2okopSAcSUIUOseddDm0cxnGQzxIR7vJgsLZbdLE3w=="
+      crossorigin="anonymous"
     />
     <script
-      src="https://unpkg.com/leaflet@1.0.3/dist/leaflet-src.js"
-      integrity="sha512-WXoSHqw/t26DszhdMhOXOkI7qCiv5QWXhH9R7CgvgZMHz1ImlkVQ3uNsiQKu5wwbbxtPzFXd1hK4tzno2VqhpA=="
-      crossorigin=""
+      src="https://unpkg.com/leaflet@1.9.4/dist/leaflet-src.esm.js"
+      integrity="sha512-/Zt0ZlKYvvW9BBzNnOHT+QYeT/cGTk6OC4mKrI/FOJXDDvgABw7lUBBMoqDnpOS4HgQ8LwdL+yJ7ArjBoL7ITQ=="
+      crossorigin="anonymous"
+      type="module"
     ></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="screen.css" />
 
     <link rel="stylesheet" href="../dist/MarkerCluster.css" />
-    <script src="../dist/leaflet.markercluster-src.js"></script>
+    <link rel="stylesheet" href="../dist/MarkerCluster.Default.css" />
 
     <style>
       .myclusterA {
@@ -40,14 +57,17 @@
   <body>
     <div id="map"></div>
 
-    <script type="text/javascript">
-      var tiles = L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+    <script type="module">
+      import { Map, TileLayer, LatLng, Marker, DivIcon, Point } from "https://unpkg.com/leaflet@1.9.4/dist/leaflet-src.esm.js";
+      import { MarkerClusterGroup } from "../dist/leaflet.markercluster-esm.js";
+      
+      var tiles = new TileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
           maxZoom: 18,
           attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         }),
-        latlng = L.latLng(50.5, 30.51);
+        latlng = new LatLng(50.5, 30.51);
 
-      var map = L.map("map", { center: latlng, zoom: 15, layers: [tiles] });
+      var map = new Map("map", { center: latlng, zoom: 15, layers: [tiles] });
 
       //Define a pane above the default markerPane
       map.createPane("paneB").style.zIndex = 610;
@@ -65,7 +85,7 @@
             for (var i = 0; i < markers.length; i++) {
               n += markers[i].number;
             }
-            return L.divIcon({ html: n, className: className, iconSize: L.point(40, 40) });
+            return new DivIcon({ html: n, className: className, iconSize: new Point(40, 40) });
           },
           //Disable all of the defaults & specify the pane:
           spiderfyOnMaxZoom: false,
@@ -75,13 +95,13 @@
         if (pane) {
           options.clusterPane = pane;
         }
-        var mcg = L.markerClusterGroup(options);
+        var mcg = new MarkerClusterGroup(options);
         return mcg;
       }
 
       function populate(markers) {
         for (var i = 0; i < 100; i++) {
-          var m = L.marker(getRandomLatLng(map), { title: i });
+          var m = new Marker(getRandomLatLng(map), { title: i });
           m.number = i;
           markers.addLayer(m);
         }
@@ -95,7 +115,7 @@
           lngSpan = northEast.lng - southWest.lng,
           latSpan = northEast.lat - southWest.lat;
 
-        return L.latLng(southWest.lat + latSpan * Math.random(), southWest.lng + lngSpan * Math.random());
+        return new LatLng(southWest.lat + latSpan * Math.random(), southWest.lng + lngSpan * Math.random());
       }
 
       populate(markersA);

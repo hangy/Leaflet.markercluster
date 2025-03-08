@@ -33,19 +33,19 @@
       child markers is still visible.</span
     ><br />
     <script type="text/javascript">
-      var tiles = L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      var tiles = new TileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
           maxZoom: 18,
           attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         }),
-        latlng = new L.LatLng(50.5, 30.51);
+        latlng = new LatLng(50.5, 30.51);
 
-      var map = new L.Map("map", { center: new L.LatLng(50.41, 30.51), zoom: 17, layers: [tiles] });
+      var map = new Map("map", { center: new LatLng(50.41, 30.51), zoom: 17, layers: [tiles] });
 
-      var markers = new L.MarkerClusterGroup({ animateAddingMarkers: true });
+      var markers = new MarkerClusterGroup({ animateAddingMarkers: true });
       var markersList = [];
 
       function populate() {
-        var m = new L.Marker(latlng);
+        var m = new Marker(latlng);
         markersList.push(m);
         markers.addLayer(m);
         return false;
@@ -54,7 +54,7 @@
       map.addLayer(markers);
 
       //Ugly add/remove code
-      L.DomUtil.get("populate").onclick = function () {
+      DomUtil.get("populate").onclick = function () {
         populate();
       };
     </script>

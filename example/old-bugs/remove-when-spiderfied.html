@@ -39,37 +39,37 @@
     >
 
     <script type="text/javascript">
-      var tiles = L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      var tiles = new TileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
           maxZoom: 18,
           attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         }),
-        latlng = new L.LatLng(50.5, 30.51);
+        latlng = new LatLng(50.5, 30.51);
 
-      var map = new L.Map("map", { center: latlng, zoom: 15, layers: [tiles] });
+      var map = new Map("map", { center: latlng, zoom: 15, layers: [tiles] });
 
-      var markers = new L.MarkerClusterGroup();
+      var markers = new MarkerClusterGroup();
       var markersList = [];
       var m;
 
-      m = new L.Marker([50.5, 30.51]);
+      m = new Marker([50.5, 30.51]);
       markersList.push(m);
       markers.addLayer(m);
-      m = new L.Marker([50.5, 30.5101]);
+      m = new Marker([50.5, 30.5101]);
       markersList.push(m);
       markers.addLayer(m);
 
       map.addLayer(markers);
 
       //Ugly add/remove code
-      L.DomUtil.get("doit").onclick = function () {
+      DomUtil.get("doit").onclick = function () {
         map.removeLayer(markers);
         map.addLayer(markersList[0]);
         map.addLayer(markersList[1]);
       };
-      L.DomUtil.get("doit2").onclick = function () {
+      DomUtil.get("doit2").onclick = function () {
         markers.clearLayers();
       };
-      L.DomUtil.get("doit3").onclick = function () {
+      DomUtil.get("doit3").onclick = function () {
         markers.removeLayers(markersList);
       };
     </script>

@@ -34,33 +34,33 @@
     ><br />
     <span id="time"></span>
     <script type="text/javascript">
-      var tiles = L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      var tiles = new TileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
           maxZoom: 18,
           attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         }),
-        latlng = new L.LatLng(50.5, 30.51);
+        latlng = new LatLng(50.5, 30.51);
 
-      var map = new L.Map("map", { center: latlng, zoom: 15, layers: [tiles] });
+      var map = new Map("map", { center: latlng, zoom: 15, layers: [tiles] });
 
-      var markers = new L.MarkerClusterGroup();
+      var markers = new MarkerClusterGroup();
       var markersList = [];
 
-      var m = new L.Marker(new L.LatLng(50.507, 30.502));
+      var m = new Marker(new LatLng(50.507, 30.502));
       m.bindPopup("asdasd");
       markersList.push(m);
       markers.addLayer(m);
 
-      m = new L.Marker(new L.LatLng(50.493, 30.518));
+      m = new Marker(new LatLng(50.493, 30.518));
       markersList.push(m);
       markers.addLayer(m);
 
-      m = new L.Marker(new L.LatLng(50.493, 30.518));
+      m = new Marker(new LatLng(50.493, 30.518));
       markersList.push(m);
       markers.addLayer(m);
 
       map.addLayer(markers);
 
-      L.DomUtil.get("doit").onclick = function () {
+      DomUtil.get("doit").onclick = function () {
         markers.zoomToShowLayer(markersList[0], function () {
           markersList[0].openPopup();
         });

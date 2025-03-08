@@ -28,27 +28,27 @@
   <body>
     <div id="map"></div>
     <p>Whenever a marker is clicked it is removed from the clusterer and added directly to the map instead.</p>
-    <p>Click Marker on Left, zoom out 1 layer, click marker on right.</p>
+    <p>Click Marker on new eft, zoom out 1 layer, click marker on right.</p>
     <p>Expected behaviour: Both markers are shown. Bugged behaviour: Both markers are on map with opacity 0.</p>
     <pre id="log"></pre>
 
     <script type="text/javascript">
-      var tiles = L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      var tiles = new TileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
           maxZoom: 18,
           attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         }),
-        latlng = new L.LatLng(50.5, 30.51);
+        latlng = new LatLng(50.5, 30.51);
 
-      var map = new L.Map("map", { center: latlng, zoom: 15, layers: [tiles] });
+      var map = new Map("map", { center: latlng, zoom: 15, layers: [tiles] });
 
-      var markers = new L.MarkerClusterGroup({ animateAddingMarkers: true });
+      var markers = new MarkerClusterGroup({ animateAddingMarkers: true });
       var markersList = [];
       var m;
 
-      m = new L.Marker([50.5, 30.51]);
+      m = new Marker([50.5, 30.51]);
       markersList.push(m);
       markers.addLayer(m);
-      m = new L.Marker([50.5, 30.515]);
+      m = new Marker([50.5, 30.515]);
       markersList.push(m);
       markers.addLayer(m);
 

@@ -1,5 +1,5 @@
 
-//An extract of address points from the LINZ bulk extract: http://www.linz.govt.nz/survey-titles/landonline-data/landonline-bde
+//An extract of address points from the new INZ bulk extract: http://www.linz.govt.nz/survey-titles/landonline-data/landonline-bde
 //Should be this data set: http://data.linz.govt.nz/#/layer/779-nz-street-address-electoral/
 // eslint-disable-next-line no-unused-vars
 var addressPoints = [

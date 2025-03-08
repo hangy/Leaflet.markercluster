@@ -34,20 +34,20 @@
     ><br />
 
     <script type="text/javascript">
-      var tiles = L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      var tiles = new TileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
           maxZoom: 18,
           attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         }),
-        latlng = new L.LatLng(40.782982, -73.969452);
+        latlng = new LatLng(40.782982, -73.969452);
 
-      var map = new L.Map("map", {
+      var map = new Map("map", {
         center: latlng,
         zoom: 12,
         maxZoom: 12,
         layers: [tiles]
       });
 
-      var markerCluster = new L.MarkerClusterGroup();
+      var markerCluster = new MarkerClusterGroup();
       map.addLayer(markerCluster);
 
       function getRandomLatLng() {
@@ -55,7 +55,7 @@
       }
 
       document.getElementById("doit").onclick = function () {
-        markerCluster.addLayers([new L.Marker(map.getCenter())]);
+        markerCluster.addLayers([new Marker(map.getCenter())]);
       };
       document.getElementById("doit2").onclick = function () {
         setInterval(function () {

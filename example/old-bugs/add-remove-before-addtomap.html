@@ -30,15 +30,15 @@
     <span>Bug <a href="https://github.com/danzel/Leaflet.markercluster/issues/64">#64</a>. Nothing should appear on the map.</span><br />
     <span id="time"></span>
     <script type="text/javascript">
-      var tiles = L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      var tiles = new TileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
           maxZoom: 18,
           attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         }),
-        latlng = new L.LatLng(50.5, 30.51);
+        latlng = new LatLng(50.5, 30.51);
 
-      var map = new L.Map("map", { center: latlng, zoom: 15, layers: [tiles] });
+      var map = new Map("map", { center: latlng, zoom: 15, layers: [tiles] });
 
-      var markers = new L.MarkerClusterGroup();
+      var markers = new MarkerClusterGroup();
 
       function getRandomLatLng(map) {
         var bounds = map.getBounds(),
@@ -47,14 +47,14 @@
           lngSpan = northEast.lng - southWest.lng,
           latSpan = northEast.lat - southWest.lat;
 
-        return new L.LatLng(southWest.lat + latSpan * Math.random(), southWest.lng + lngSpan * Math.random());
+        return new LatLng(southWest.lat + latSpan * Math.random(), southWest.lng + lngSpan * Math.random());
       }
 
       function populate(length) {
         var list = [],
           i;
         for (i = 0; i < length; i++) {
-          var m = new L.Marker(getRandomLatLng(map));
+          var m = new Marker(getRandomLatLng(map));
           markers.addLayer(m);
           markers.removeLayer(m);
         }

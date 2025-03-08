@@ -33,9 +33,9 @@
 
     <span>Bug <a href="https://github.com/danzel/Leaflet.markercluster/issues/160">#160</a>. Click 1,2,3. There should be nothing on the map.</span><br />
     <script type="text/javascript">
-      var map = new L.Map("map");
+      var map = new Map("map");
 
-      var tiles = L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      var tiles = new TileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
         maxZoom: 18,
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
       });
@@ -45,15 +45,15 @@
         [44.98131207805678, 6.0726203025917],
         [44.981459751363204, 6.073026722623153]
       ];
-      map.fitBounds(new L.LatLngBounds(objectBounds));
+      map.fitBounds(new LatLngBounds(objectBounds));
 
-      var markers1 = new L.MarkerClusterGroup();
-      var markers2 = new L.MarkerClusterGroup();
+      var markers1 = new MarkerClusterGroup();
+      var markers2 = new MarkerClusterGroup();
 
       map.addLayer(markers1);
 
-      var aMarker = new L.Marker(new L.LatLng(44.9813, 6.07262));
-      var anotherMarker = new L.Marker(new L.LatLng(44.9814, 6.072621));
+      var aMarker = new Marker(new LatLng(44.9813, 6.07262));
+      var anotherMarker = new Marker(new LatLng(44.9814, 6.072621));
 
       markers1.addLayer(aMarker);
       markers2.addLayer(anotherMarker);

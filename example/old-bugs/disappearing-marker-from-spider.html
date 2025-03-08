@@ -60,19 +60,19 @@
       var trainPosition = 0,
         trainDirection = "up";
 
-      var tiles = L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      var tiles = new TileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
           maxZoom: 18,
           attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         }),
-        map = new L.Map("map", { zoom: 15, layers: [tiles] }),
-        markers = new L.MarkerClusterGroup({ spiderfyOnMaxZoom: false, showCoverageOnHover: false, zoomToBoundsOnClick: false });
+        map = new Map("map", { zoom: 15, layers: [tiles] }),
+        markers = new MarkerClusterGroup({ spiderfyOnMaxZoom: false, showCoverageOnHover: false, zoomToBoundsOnClick: false });
 
-      var stationGeoJsonLayer = L.geoJson(stationJson, {
+      var stationGeoJsonLayer = new .geoJson(stationJson, {
           onEachFeature: function (feature, layer) {
             layer.bindPopup(feature.properties.name);
           }
         }),
-        trainGeoJsonLayer = L.geoJson(trainJson[trainPosition], {
+        trainGeoJsonLayer = new .geoJson(trainJson[trainPosition], {
           onEachFeature: function (feature, layer) {
             layer.bindPopup(feature.properties.name);
           }
@@ -99,7 +99,7 @@
         else if (trainPosition == 0) trainDirection = "up";
 
         // build a new geoJson layer with the new train information
-        trainGeoJsonLayer = L.geoJson(trainJson[trainPosition], {});
+        trainGeoJsonLayer = new .geoJson(trainJson[trainPosition], {});
 
         // update the cluster markers with both layers (stations first so that the station marker is always the first on spider.
         markers.clearLayers();
@@ -107,7 +107,7 @@
         markers.addLayer(trainGeoJsonLayer);
       }
 
-      L.DomUtil.get("moveTrain").onclick = function () {
+      DomUtil.get("moveTrain").onclick = function () {
         moveTrain();
       };
     </script>

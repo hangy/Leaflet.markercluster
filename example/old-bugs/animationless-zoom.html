@@ -34,21 +34,21 @@
     ><br />
     <span id="time"></span>
     <script type="text/javascript">
-      var tiles = L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      var tiles = new TileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
           maxZoom: 18,
           attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         }),
-        latlng = new L.LatLng(-37.36142550190516, 174.254150390625);
+        latlng = new LatLng(-37.36142550190516, 174.254150390625);
 
-      var map = new L.Map("map", { center: latlng, zoom: 7, layers: [tiles] });
+      var map = new Map("map", { center: latlng, zoom: 7, layers: [tiles] });
 
-      var markers = new L.MarkerClusterGroup();
-      markers.addLayer(new L.Marker([-37.77852090603777, 175.3103667497635])); //The one we zoom in on
-      markers.addLayer(new L.Marker([-37.711800591811055, 174.5003479003906])); //Marker that we cluster with at the top zoom level, but not 1 level down
+      var markers = new MarkerClusterGroup();
+      markers.addLayer(new Marker([-37.77852090603777, 175.3103667497635])); //The one we zoom in on
+      markers.addLayer(new Marker([-37.711800591811055, 174.5003479003906])); //Marker that we cluster with at the top zoom level, but not 1 level down
       map.addLayer(markers);
 
       //Ugly add/remove code
-      L.DomUtil.get("doit").onclick = function () {
+      DomUtil.get("doit").onclick = function () {
         map.setView([-37.77852090603777, 175.3103667497635], 15);
       };
     </script>
