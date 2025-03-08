@@ -41,6 +41,7 @@
   "style": "dist/MarkerCluster.css",
   "scripts": {
     "test": "web-test-runner spec/suites/*.js",
+    "postinstall": "node build/fix-leaflet.mjs",
     "prepublish": "jake",
     "lint": "eslint && stylelint **/*.css && prettier --check .",
     "lint:fix": "eslint --fix && stylelint --fix **/*.css && prettier --write .",
