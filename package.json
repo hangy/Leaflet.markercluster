@@ -35,7 +35,7 @@
     "uglify-js": "3.19.3"
   },
   "peerDependencies": {
-    "leaflet": "^2.0.0"
+    "leaflet": "^2.0.0-alpha"
   },
   "main": "dist/leaflet.markercluster-src.js",
   "style": "dist/MarkerCluster.css",
