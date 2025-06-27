@@ -5,6 +5,7 @@
 import { Browser, DivIcon, DomUtil, FeatureGroup, LatLng, LatLngBounds, LayerGroup, Marker, Point, Polygon, Util } from 'leaflet';
 
 import { MarkerCluster } from './MarkerCluster.js';
+import { MarkerClusterNonAnimated } from './MarkerCluster.Spiderfier.js';
 import { DistanceGrid } from './DistanceGrid.js';
 
 export const MarkerClusterGroup = FeatureGroup.extend({
