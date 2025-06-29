@@ -1,5 +1,6 @@
 import { Icon, LatLng, LatLngBounds, Marker } from 'leaflet';
 import { QuickHull } from './MarkerCluster.QuickHull.js';
+import { MarkerOpacityMixin } from './MarkerOpacity.js';
 
 export const MarkerCluster = Marker.extend({
 	options: Icon.prototype.options,
@@ -420,3 +421,4 @@ export const MarkerCluster = Marker.extend({
 	}
 });
 
+Object.assign(MarkerCluster.prototype, MarkerOpacityMixin);

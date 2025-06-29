@@ -7,6 +7,7 @@ import { Browser, DivIcon, DomUtil, FeatureGroup, LatLng, LatLngBounds, LayerGro
 import { MarkerCluster } from './MarkerCluster.js';
 import { MarkerClusterNonAnimated } from './MarkerCluster.Spiderfier.js';
 import { DistanceGrid } from './DistanceGrid.js';
+import { MarkerOpacityMixin } from './MarkerOpacity.js';
 
 export const MarkerClusterGroup = FeatureGroup.extend({
 
@@ -1417,3 +1418,5 @@ MarkerClusterGroup.include({
 export const markerClusterGroup = function (options) {
 	return new MarkerClusterGroup(options);
 };
+
+Object.assign(MarkerClusterGroup.prototype, MarkerOpacityMixin);
