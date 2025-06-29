@@ -1,4 +1,5 @@
 import { Icon, LatLng, LatLngBounds, Marker } from 'leaflet';
+import { QuickHull } from './MarkerCluster.QuickHull.js';
 
 export const MarkerCluster = Marker.extend({
 	options: Icon.prototype.options,
@@ -403,6 +404,19 @@ export const MarkerCluster = Marker.extend({
 	_isSingleParent: function () {
 		//Don't need to check this._markers as the rest won't work if there are any
 		return this._childClusters.length > 0 && this._childClusters[0]._childCount === this._childCount;
+	},
+
+	getConvexHull: function () {
+		var childMarkers = this.getAllChildMarkers(),
+			points = [],
+			p, i;
+
+		for (i = childMarkers.length - 1; i >= 0; i--) {
+			p = childMarkers[i].getLatLng();
+			points.push(p);
+		}
+
+		return QuickHull.getConvexHull(points);
 	}
 });
 
