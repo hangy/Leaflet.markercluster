@@ -5,7 +5,7 @@
 import { Browser, DivIcon, DomUtil, FeatureGroup, LatLng, LatLngBounds, LayerGroup, Marker, Point, Polygon, Util } from 'leaflet';
 
 import { MarkerCluster } from './MarkerCluster.js';
-import { MarkerClusterNonAnimated } from './MarkerCluster.Spiderfier.js';
+import { Spiderfier } from './Spiderfier.js';
 import { DistanceGrid } from './DistanceGrid.js';
 import { MarkerOpacityMixin } from './MarkerOpacity.js';
 
@@ -83,10 +83,12 @@ export const MarkerClusterGroup = FeatureGroup.extend({
 		};
 
 		// Hook the appropriate animation methods.
-		var animate = DomUtil.TRANSITION && this.options.animate;
+		const animate = DomUtil.TRANSITION && this.options.animate;
 		Util.extend(this, animate ? this._withAnimation : this._noAnimation);
-		// Remember which MarkerCluster class to instantiate (animated or not).
-		this._markerCluster = animate ? MarkerCluster : MarkerClusterNonAnimated;
+		// Always use MarkerCluster, spiderfier handles animation
+		this._markerCluster = MarkerCluster;
+		// Attach a Spiderfier instance to the group
+		this._spiderfier = new Spiderfier(this, !!animate);
 	},
 
 	addLayer: function (layer) {
@@ -115,8 +117,8 @@ export const MarkerClusterGroup = FeatureGroup.extend({
 
 		//If we have already clustered we'll need to add this one to a cluster
 
-		if (this._unspiderfy) {
-			this._unspiderfy();
+		if (this._spiderfier) {
+			this._spiderfier.unspiderfy();
 		}
 
 		this._addLayer(layer, this._maxZoom);
@@ -175,9 +177,11 @@ export const MarkerClusterGroup = FeatureGroup.extend({
 			return this;
 		}
 
-		if (this._unspiderfy) {
-			this._unspiderfy();
-			this._unspiderfyLayer(layer);
+		if (this._spiderfier) {
+			this._spiderfier.unspiderfy();
+			if (this._spiderfier._spiderfied) {
+				this._spiderfier._unspiderfyLayer?.(layer);
+			}
 		}
 
 		//Remove the marker from clusters
@@ -223,8 +227,8 @@ export const MarkerClusterGroup = FeatureGroup.extend({
 				var start = (new Date()).getTime();
 
 				// Make sure to unspiderfy before starting to add some layers
-				if (this._map && this._unspiderfy) {
-					this._unspiderfy();
+				if (this._map && this._spiderfier) {
+					this._spiderfier.unspiderfy();
 				}
 
 				for (; offset < l; offset++) {
@@ -372,8 +376,8 @@ export const MarkerClusterGroup = FeatureGroup.extend({
 			return this;
 		}
 
-		if (this._unspiderfy) {
-			this._unspiderfy();
+		if (this._spiderfier) {
+			this._spiderfier.unspiderfy();
 
 			// Work on a copy of the array, so that next loop is not affected.
 			var layersArray2 = layersArray.slice(),
@@ -388,7 +392,7 @@ export const MarkerClusterGroup = FeatureGroup.extend({
 					continue;
 				}
 
-				this._unspiderfyLayer(m);
+				this._spiderfier._unspiderfyLayer?.(m);
 			}
 		}
 

@@ -1,6 +1,7 @@
 import { Icon, LatLng, LatLngBounds, Marker } from 'leaflet';
 import { QuickHull } from './MarkerCluster.QuickHull.js';
 import { MarkerOpacityMixin } from './MarkerOpacity.js';
+import { Spiderfier } from './Spiderfier.js';
 
 export const MarkerCluster = Marker.extend({
 	options: Icon.prototype.options,
@@ -21,12 +22,24 @@ export const MarkerCluster = Marker.extend({
 
 		this._bounds = new LatLngBounds();
 
+		// Attach a Spiderfier instance to the group if not present
+		if (!group._spiderfier) {
+			group._spiderfier = new Spiderfier(group, group.options.animate !== false);
+		}
+
 		if (a) {
 			this._addChild(a);
 		}
 		if (b) {
 			this._addChild(b);
 		}
+	},
+	// Spiderfy API
+	spiderfy: function () {
+		this._group._spiderfier.spiderfy(this);
+	},
+	unspiderfy: function (zoomDetails) {
+		this._group._spiderfier.unspiderfy(zoomDetails);
 	},
 
 	//Recursively retrieve all child markers of this cluster
